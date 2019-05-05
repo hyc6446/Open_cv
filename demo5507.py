@@ -8,21 +8,26 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-#图像旋转
-def matrix():
+#仿射变换
+def transform():
     '''
-    :param pic 图像源
-    :param M( center 旋转中心,angle 选择角度,scale 缩放因子)
+    :param src :图像源
+    :param M仿射变换因子getAffineTransform(pts1,pts2),pts1,pts2np.float32格式2x3矩阵
     :param dsize 变换后图像尺寸
-    :return: 变幻后图像
+    :return:
     '''
     img = cv2.imread('./testimg/img001.jpg')
     rows,cols = img.shape[:2]
-    M=cv2.getRotationMatrix2D((cols/2,rows/2),-90,0.9)
+    pts1=np.float32([[50,50],[100,50],[50,100]])
+    pts2=np.float32([[50,10],[100,100],[50,50]])
+    M=cv2.getAffineTransform(pts1,pts2)
+    res=cv2.warpAffine(img,M,(cols,rows))
 
-    res = cv2.warpAffine(img,M,(cols,rows))
     plt.subplot(121),plt.imshow(img),plt.title('img')
     plt.subplot(122),plt.imshow(res),plt.title('res')
     plt.show()
-if __name__ == '__main__':
-    matrix()
+
+
+
+if __name__ =='__main__':
+    transform()
