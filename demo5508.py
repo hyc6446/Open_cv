@@ -18,10 +18,10 @@ def warpPerspective():
     '''
     img=cv2.imread('./testimg/dabai.png')
     rows,cols=img.shape[:2]
-    pts1=np.float32([[300,0],[350,0],[300,100],[350,100]])
-    pts2=np.float32([[0,0],[50,0],[0,100],[50,100]])
+    pts1=np.float32([[300,0],[500,0],[300,200],[500,200]])
+    pts2=np.float32([[0,0],[200,0],[0,200],[200,200]])
     M = cv2.getPerspectiveTransform(pts1,pts2)
-    res = cv2.warpPerspective(img,M,(rows,cols))
+    res = cv2.warpPerspective(img,M,(200,200))
 
     plt.subplot(121),plt.imshow(img),plt.title('img')
     plt.subplot(122),plt.imshow(res),plt.title('res')
